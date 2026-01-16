@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage</title>
+</head>
+<body>
+    <p id="desired_state">Desired State: {{desired_state}}</p> 
+    <!-- <br> -->
+    <p id="actual_state">Actual State: {{actual_state}}</p>
+    <!-- <br> -->
+
+    <button id="on_button">Turn ON</button>
+    <button id="off_button">Turn OFF</button>
+
+    <p id="status">Status: unknown</p>
+</body>
+</html>
+
+<script>
+    const desired_state = document.getElementById("desired_state");
+    const actual_state = document.getElementById("actual_state");
+    const on_button = document.getElementById("on_button");
+    const off_button = document.getElementById("off_button");
+    const status = document.getElementById("status");
+
+    // this function is used to send data to the database
+    async function sendDesiredState(state) {
+        //Display button while request is in-flight
+        on_button.disabled = true;
+        off_button.disabled = true;
+
+        status.innerText = state === 1 ? "Status: turning ON..." : "Status: turning OFF...";
+
+        try {
+            const res = await fetch("/device/001/change_state", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    device_id: "led",
+                    desired_state: state
+                })
+            });
+
+            desired_state.innerText = state === 1 ? "Desired State: 1" : "Desired State: 0"
+                        
+            if (!res.ok){
+                // status.innerText = actual_state === 1 ? "Status: ON": "Status: OFF";
+                throw new Error("Request failed");
+            }
+            else{
+            }
+            
+            const data = await res.json(); // <--- THIS reads the JSON returned by Flask
+            console.log(data)
+            actual_state.innerText = state === 1 ? "Actual State: 1" : "Actual State: 0"
+        } catch (err) {
+            console.log(err);
+            alert("Failed to send command");
+            status.innerText = "Status: error";
+        } finally {
+
+            on_button.disabled = false;
+            off_button.disabled = false;
+        }
+    }
+
+    // this function is to send desired state to the flask backend to send to the database
+    on_button.onclick = () => sendDesiredState(1);
+    off_button.onclick = () => sendDesiredState(0);
+</script>
