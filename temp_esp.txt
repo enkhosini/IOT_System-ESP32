@@ -12,8 +12,8 @@ const char* server_ip = "<flask_server_ip>";
 const int port = 5000;
 const char* esp_id = "001";
 
-//const char* send_server = "http://192.168.8.128:5000/device/actual_state";
-//const char* rec_server = "http://192.168.8.128:5000/device/001/change_state";
+//const char* send_server = "http://<flask_server_ip>:5000/device/actual_state";
+//const char* rec_server = "http://<flask_server_ip>:5000/device/001/change_state";
 
 #define LED_PIN 12
 String device_id = "led";
