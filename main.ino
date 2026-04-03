@@ -4,9 +4,9 @@
 #include <ArduinoJson.h>
 
 // Configuration
-const char* ssid = "HUAWEI-B525-C12D";
-const char* password = "4TL3ETGD4GH";
-const char* server_ip = "192.168.8.128";
+const char* ssid = "<your_wifi_ssid>";
+const char* password = "<your_wifi_pass>";
+const char* server_ip = "<flask_server_ip>";
 const int port = 5000;
 
 const char* esp_id = "001";          // This specific ESP board
