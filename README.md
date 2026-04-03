@@ -19,10 +19,10 @@ and they can see the logs of events that have happened and from which device/esp
 - misc(not important)
 - templates
   > html files
-> `app.py`
-> `main.ino`
-> `local_control_db.db`
-> error documentation
+- `app.py`
+- `main.ino`
+- `local_control_db.db`
+- error documentation
 
 ## Installation(for linux)
 ### for the Flask Server 
