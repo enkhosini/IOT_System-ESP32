@@ -22,6 +22,7 @@ and they can see the logs of events that have happened and from which device/esp
 - `app.py`
 - `main.ino`
 - `local_control_db.db`
+- temp_esp.ino (still in progress but is meant to track analog measurments like temperature)
 - error documentation
 
 ## Installation(for linux)
